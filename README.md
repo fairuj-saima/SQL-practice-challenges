@@ -42,19 +42,3 @@ sql-practice-challenges/
 ├── LICENSE
 └── README.md                      # You are here!
 
-## 🚀 How to Use This Repo
-
-To run these queries and practice on your own machine, follow these steps:
-
-### 1. Set Up the Database & Schema
-First, load the table structure and mock data into your database engine (MySQL, PostgreSQL, MariaDB, or SQLite). 
-
-* **Using a Database GUI (like DBeaver, TablePlus, or VS Code SQL Tools):**
-  Open `01-basics-and-crud/schema.sql`, copy the contents, paste them into a new SQL editor, and run the script to build and seed your `products` table.
-* **Using the Command Line:**
-  ```bash
-  # For MySQL / MariaDB
-  mysql -u your_username -p your_database_name < 01-basics-and-crud/schema.sql
-
-  # For PostgreSQL
-  psql -U your_username -d your_database_name -f 01-basics-and-crud/schema.sql
