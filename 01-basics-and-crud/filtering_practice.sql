@@ -8,7 +8,9 @@
 -- ------------------------------------------------------------------------------
 SELECT
 	product_name,
-	categoryFROM productsWHERE product_name LIKE '%Wireless%' AND stock_quantity > 0;
+	category
+FROM products
+WHERE product_name LIKE '%Wireless%' AND stock_quantity > 0;
 
 -- ------------------------------------------------------------------------------
 -- 2. Basic Filtering: High-Value Items in Core Categories
@@ -16,19 +18,25 @@ SELECT
 -- ------------------------------------------------------------------------------
 SELECT product_name,
 	category,
-	priceFROM productsWHERE category IN ('Electronics', 'Stationery', 'Kitchen') AND price > 20.00;
+	price
+FROM products
+WHERE category IN ('Electronics', 'Stationery', 'Kitchen') AND price > 20.00;
 
 -- ------------------------------------------------------------------------------
 -- 3. Range Filtering: Budget Mid-Range Exclusion
 -- Retrieves products NOT in Furniture/Kitchen priced strictly between $10.00 and $50.00.
 -- ------------------------------------------------------------------------------
-SELECT *FROM productsWHERE category NOT IN ('Furniture', 'Kitchen') AND price BETWEEN 10.00 AND 50.00;
+SELECT *
+FROM products
+WHERE category NOT IN ('Furniture', 'Kitchen') AND price BETWEEN 10.00 AND 50.00;
 
 -- ------------------------------------------------------------------------------
 -- 4. Advanced Logic: Low Stock / Premium Non-Stationery Items
 -- Targets items needing attention (low stock OR high price) excluding Stationery.
 -- ------------------------------------------------------------------------------
-SELECT *FROM productsWHERE (stock_quantity < 15 OR price >=150.00) 
+SELECT *
+FROM products
+WHERE (stock_quantity < 15 OR price >=150.00) 
 	AND NOT category = 'stationery';
 
 -- ------------------------------------------------------------------------------
@@ -37,7 +45,10 @@ SELECT *FROM productsWHERE (stock_quantity < 15 OR price >=150.00)
 -- ------------------------------------------------------------------------------
 SELECT category,
 	SUM(stock_quantity) AS total_stock,
-	MAX(price) AS maximum_priceFROM productsWHERE price > 20.00 GROUP BY categoryHAVING SUM(stock_quantity) > 50;
+	MAX(price) AS maximum_price
+FROM products
+WHERE price > 20.00
+GROUP BY categoryHAVING SUM(stock_quantity) > 50;
 
 -- ------------------------------------------------------------------------------
 -- 6. Exclusions: The "Non-W" Clearance Query
@@ -46,20 +57,25 @@ SELECT category,
 SELECT
 	product_name,
 	category,
-	priceFROM productsWHERE product_name NOT LIKE 'W%' AND category NOT IN ('Kitchen', 'Furniture')ORDER BY price DESC;
+	price
+FROM products
+WHERE product_name NOT LIKE 'W%' AND category NOT IN ('Kitchen', 'Furniture')ORDER BY price DESC;
 
 -- ------------------------------------------------------------------------------
 -- 7. Targeted Restocking (DML Update)
 -- Adds 25 units of stock to under-stocked (< 100) Electronics & Stationery.
 -- ------------------------------------------------------------------------------
 UPDATE products
-	SET stock_quantity = stock_quantity+25WHERE category IN ('Electronics', 'Stationery') AND stock_quantity < 100;
+	SET stock_quantity = stock_quantity+25
+WHERE category IN ('Electronics', 'Stationery') AND stock_quantity < 100;
 
 -- ------------------------------------------------------------------------------
 -- 8. Pattern Matching Audit: Special Names & Out-of-Bound Prices
 -- Finds products with 'and' in their name OR priced outside the $30-$200 range.
 -- ------------------------------------------------------------------------------
-SELECT *FROM productsWHERE product_name LIKE '%and%' OR price NOT BETWEEN 30.00 AND 200.00;
+SELECT *
+FROM products
+WHERE product_name LIKE '%and%' OR price NOT BETWEEN 30.00 AND 200.00;
 
 -- ------------------------------------------------------------------------------
 -- 9. Calculated Fields: High Potential Revenue Analysis
@@ -68,20 +84,26 @@ SELECT *FROM productsWHERE product_name LIKE '%and%' OR price NOT BETWEEN 30.00 
 SELECT
 	product_name,
 	stock_quantity,
-	price*stock_quantity AS potential_revenewFROM productsWHERE (price * stock_quantity) > 5000.00ORDER BY potential_revenew DESC;
+	price*stock_quantity AS potential_revenew
+FROM productsWHERE (price * stock_quantity) > 5000.00
+ORDER BY potential_revenew DESC;
 
 -- ------------------------------------------------------------------------------
 -- 10. Double-Wildcard Filtering: Specific Character Containment
 -- Finds product names containing the letter 'e' but completely lacking 'a'.
 -- ------------------------------------------------------------------------------
-SELECT *FROM productsWHERE product_name LIKE '%e%'
+SELECT *
+FROM products
+WHERE product_name LIKE '%e%'
 	AND product_name NOT LIKE '%a%';
 
 -- ------------------------------------------------------------------------------
 -- 11. Range Math: Non-Middle Tier Inventory Clearance
 -- Excludes the middle pricing tier ($20 to $100) for products currently in stock.
 -- ------------------------------------------------------------------------------
-SELECT *FROM productsWHERE (price NOT BETWEEN 20.00 AND 100.00) AND stock_quantity>0;
+SELECT *
+FROM products
+WHERE (price NOT BETWEEN 20.00 AND 100.00) AND stock_quantity>0;
 
 -- ------------------------------------------------------------------------------
 -- 12. Complex Rules: "Cheap & Plentiful" Promo Filter
@@ -91,7 +113,9 @@ SELECT
 	product_name,
 	category,
 	price,
-	stock_quantityFROM productsWHERE (category = 'Stationery' AND price < 15.00) OR stock_quantity >= 100ORDER BY stock_quantity DESC;
+	stock_quantity
+FROM products
+WHERE (category = 'Stationery' AND price < 15.00) OR stock_quantity >= 100ORDER BY stock_quantity DESC;
 
 -- ------------------------------------------------------------------------------
 -- 13. Modulo Math: Pricing Audit for Fractional Cent Values
@@ -100,4 +124,6 @@ SELECT
 SELECT 
 	product_name,
 	price,
-	price % 1 AS cents_onlyFROM productsWHERE price%1 != 0.00 AND price%1!=0.50;
+	price % 1 AS cents_only
+FROM products
+WHERE price%1 != 0.00 AND price%1!=0.50;
