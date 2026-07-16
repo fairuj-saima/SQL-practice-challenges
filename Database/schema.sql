@@ -55,3 +55,31 @@ INSERT INTO suppliers (supplier_id, supplier_name, country) VALUES
 (3, 'EcoKitchen Ltd', 'Canada'),
 (4, 'Future Tech Corp', 'South Korea'),
 (5, 'Nordic Timber Co', 'Sweden');
+
+
+-- 🏢 10 NEW SUPPLIERS (IDs 8 through 17)
+INSERT INTO suppliers (supplier_id, supplier_name, country) VALUES
+(8, 'Titanium Heavy Industries', 'Germany'),
+(9, 'AeroSpace Logistics', 'USA'),
+(10, 'Neo-Seoul Foundry', 'South Korea'),
+(11, 'Prism Optics Group', 'Canada'),
+(12, 'Midnight Leatherworks', 'Italy'),
+(13, 'Apex Bio-Tech Trading', 'Singapore'),
+(14, 'Omega Solar Systems', 'Australia'),
+(15, 'Pixel & Matrix Displays', 'Taiwan'),
+(16, 'Velvet Thread Weavers', 'Egypt'),
+(17, 'Phantom Labs Corp', 'USA');
+
+
+-- 📦 10 NEW PRODUCTS (IDs 11 through 20) - Purely matching on p.id
+INSERT INTO products (id, product_name, category, price, stock_quantity) VALUES
+(11, 'Next-Gen VR Headset', 'Electronics', 799.99, 12),
+(12, 'Anodized Titanium Bolt Pack', 'Hardware', 45.00, 300),
+(13, 'Carbon Fiber Drone Frame', 'Aerospace', 299.50, 25),
+(14, '4K Laser Projector Lens', 'Electronics', 1250.00, 5),
+(15, 'Full-Grain Italian Belt', 'Apparel', 85.00, 40),
+(16, 'Ergonomic Standing Desk', 'Office Supplies', 420.00, 0),
+(17, 'Industrial Grade Solar Panel', 'Hardware', 350.00, 80),
+(18, '240Hz OLED Panel Replacement', 'Electronics', 199.99, 15),
+(19, 'Dark Matter Cooling Fluid', 'Electronics', 24.99, 500),
+(20, 'Cyberpunk Leather Trenchcoat', 'Apparel', 350.00, 8);
