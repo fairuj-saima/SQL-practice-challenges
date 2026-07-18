@@ -214,3 +214,141 @@ LEFT JOIN products AS p
     ON p.id = s.supplier_id
 WHERE p.stock_quantity = 0
    OR p.stock_quantity IS NULL;
+
+
+-- ------------------------------------------------------------------------------
+-- Challenge 15: Inactive Vendor Tracking (Anti-Join Variant A)
+-- Goal: Identify suppliers currently hosting no products in inventory.
+-- ------------------------------------------------------------------------------
+SELECT
+    s.supplier_name,
+    s.country
+FROM suppliers AS s
+LEFT JOIN products AS p
+    ON p.id = s.supplier_id
+WHERE p.id IS NULL;
+
+
+-- ------------------------------------------------------------------------------
+-- Challenge 16: Supply Chain Disconnect Pool
+-- Goal: Pull orphaned products and unutilized vendors together in an unsorted group.
+-- ------------------------------------------------------------------------------
+SELECT 
+    p.product_name,
+    s.supplier_name
+FROM products AS p
+FULL JOIN suppliers AS s
+    ON p.id = s.supplier_id
+WHERE p.id IS NULL
+   OR s.supplier_id IS NULL;
+
+
+-- ------------------------------------------------------------------------------
+-- Challenge 17: Total Potential Logistics Map
+-- Goal: Map a full theoretical grid of all product-to-supplier matching possibilities.
+-- ------------------------------------------------------------------------------
+SELECT
+    p.product_name,
+    s.supplier_name 
+FROM products AS p
+CROSS JOIN suppliers AS s;
+
+
+-- ------------------------------------------------------------------------------
+-- Challenge 18: Unlinked Luxury Audit
+-- Goal: Track missing supplier links on high-end items valued above 500.00.
+-- ------------------------------------------------------------------------------
+SELECT 
+    p.product_name,
+    p.price 
+FROM products AS p
+LEFT JOIN suppliers AS s
+    ON p.id = s.supplier_id
+WHERE s.supplier_id IS NULL
+  AND p.price > 500.00;
+
+
+-- ------------------------------------------------------------------------------
+-- Challenge 19: Targeted Strategic Matchmaking
+-- Goal: Cross-join Electronics category entries exclusively with Canadian vendors.
+-- ------------------------------------------------------------------------------
+SELECT
+    p.product_name,
+    p.category,
+    s.supplier_name,
+    s.country
+FROM products AS p
+CROSS JOIN suppliers AS s
+WHERE p.category = 'Electronics'
+  AND s.country = 'Canada';
+
+
+-- ------------------------------------------------------------------------------
+-- Challenge 20: Global Price Parity Matrix
+-- Goal: Run a self-evaluation to pair products with anything cheaper than themselves.
+-- ------------------------------------------------------------------------------
+SELECT
+    p1.product_name AS product_a,
+    p1.price AS price_a,
+    p2.product_name AS product_b,
+    p2.price AS price_b
+FROM products AS p1
+CROSS JOIN products AS p2
+WHERE p1.price > p2.price;
+
+
+-- ------------------------------------------------------------------------------
+-- Challenge 21: Strategic Supplier Backup Plan
+-- Goal: Match vendors with regional alternatives in the same country, skipping self-pairs.
+-- ------------------------------------------------------------------------------
+SELECT
+    s1.supplier_name AS primary_supplier,
+    s2.supplier_name AS backup_supplier,
+    s1.country
+FROM suppliers AS s1
+CROSS JOIN suppliers AS s2
+WHERE s1.country = s2.country
+  AND s1.supplier_id <> s2.supplier_id;
+
+
+-- ------------------------------------------------------------------------------
+-- Challenge 22: Ghost Town Sorting Blueprint
+-- Goal: Perform a full anti-join, explicitly sorting orphans to group text values up top.
+-- ------------------------------------------------------------------------------
+SELECT
+    p.product_name,
+    s.supplier_name    
+FROM products AS p
+FULL JOIN suppliers AS s
+    ON p.id = s.supplier_id
+WHERE p.id IS NULL
+   OR s.supplier_id IS NULL
+ORDER BY p.product_name DESC;
+
+
+-- ------------------------------------------------------------------------------
+-- Challenge 23: Overstock Clearance Matrix
+-- Goal: Pair bulk inventory stocks (> 100) specifically against Japanese supplier terms.
+-- ------------------------------------------------------------------------------
+SELECT
+    p.product_name,
+    p.stock_quantity,
+    s.supplier_name,
+    s.country
+FROM products AS p
+CROSS JOIN suppliers AS s
+WHERE p.stock_quantity > 100
+  AND s.country = 'Japan';
+
+
+-- ------------------------------------------------------------------------------
+-- Challenge 24: Inactive Vendor Tracking (Anti-Join Variant B Verification)
+-- Goal: Audited baseline fallback to safeguard dead supplier lines.
+-- ------------------------------------------------------------------------------
+SELECT
+    s.supplier_name,
+    s.country
+FROM suppliers AS s
+LEFT JOIN products AS p
+    ON p.id = s.supplier_id
+WHERE p.id IS NULL;
