@@ -1,21 +1,23 @@
-# SQL-practice-challenges
+# SQL Practice & Database Challenges
 
-A hands-on collection of SQL exercises and solutions covering DDL, DML, filtering, joins, set operations, and aggregations using a mock ecommerce inventory and sales channel schema.
+A hands-on collection of SQL exercises and solutions covering DDL, DML, filtering, joins, set operations, and string/numeric data transformations using a mock ecommerce inventory and sales channel schema.
 
 ---
 
-## 📊 SQL Practice & Database Challenges
+## 📊 About This Repository
 
-Welcome! This repository is a documented log of my SQL learning journey. It contains a mock database schema and a series of hands-on workbooks designed to build and test core relational database skills—ranging from basic data manipulation to advanced relational calculations, cross-table connections, and set theory analysis.
+Welcome! This repository is a documented log of my SQL learning journey built with **Microsoft SQL Server (T-SQL)**. It contains a mock ecommerce database schema and a series of hands-on workbooks designed to build and test core relational database skills—ranging from basic data manipulation to advanced joins, set theory analysis, and scalar data transformation.
+
+---
 
 ## 🛠️ Skills & Concepts Showcased
 
-* **Data Definition Language (DDL):** Creating tables (`CREATE TABLE`) and enforcing referential integrity with constraints.
-* **Data Manipulation Language (DML):** Inserting transactional rows safely (`INSERT INTO`), mass-updating relational foreign keys (`UPDATE`), and staging clean rebuilds.
-* **Data Querying & Filtering:** Utilizing conditional logic (`WHERE`, `AND`, `OR`, `BETWEEN`), pattern matching using wildcards (`LIKE`), and sorting sequentially (`ORDER BY`).
-* **Mathematical & Calculation Power:** Designing dynamic calculated fields on the fly and utilizing modulo arithmetic (`%`) for inventory audits.
-* **Multi-Table Relational Queries:** Connecting datasets using `INNER JOIN`, `LEFT JOIN`, and `RIGHT JOIN` based on explicit primary-to-foreign key alignments.
-* **Set Operations:** Implementing set theory logic using `UNION`, `UNION ALL`, `INTERSECT`, and `EXCEPT` to run cross-channel auditing between separate retail and online datasets.
+* **Data Definition Language (DDL):** Creating tables (`CREATE TABLE`) and enforcing referential integrity with primary/foreign key constraints.
+* **Data Manipulation Language (DML):** Inserting transactional rows safely (`INSERT INTO`), updating records (`UPDATE`), and staging clean rebuilds.
+* **Data Querying & Filtering:** Utilizing conditional logic (`WHERE`, `AND`, `OR`), pattern matching (`LIKE`), and sorting (`ORDER BY`).
+* **Multi-Table Relational Queries:** Connecting datasets using `INNER JOIN`, `LEFT JOIN`, and `RIGHT JOIN` based on explicit key alignments.
+* **Set Operations:** Combining and auditing cross-channel data pipelines using `UNION`, `UNION ALL`, `INTERSECT`, and `EXCEPT`.
+* **Data Transformation & Cleaning:** Manipulating text, precision math, and scalar expressions using functions such as `UPPER()`, `LOWER()`, `TRIM()`, `LEFT()`, `RIGHT()`, `REPLACE()`, `ROUND()`, `CEILING()`, `ABS()`, and `%` (modulo).
 
 ---
 
@@ -68,12 +70,14 @@ The project separates database setup and raw table infrastructure from query pra
 ```text
 sql-practice-challenges/
 ├── Database/
-│   └── schema.sql                  # Centralized setup: Cascading table schemas and 20+ row seed script
+│   └── schema.sql                        # Centralized setup: Cascading table schemas and seed scripts
 ├── 01-basics-and-crud/
-│   ├── queries.sql                 # Workbook: Single-table core CRUD modifications
-│   └── filtering_practice.sql      # Workbook: Dynamic calculations and price-modulo audits
+│   ├── queries.sql                       # Workbook: Single-table core CRUD modifications
+│   └── filtering_practice.sql            # Workbook: Dynamic calculations and price-modulo audits
 ├── 02-multi-table-queries/
-│   ├── joins_practice.sql          # Workbook: Relational analysis using INNER, LEFT, & RIGHT joins
-│   └── set_operations.sql          # Workbook: Combining and intersecting web vs retail data pipelines
+│   ├── joins_practice.sql                # Workbook: Relational analysis using INNER, LEFT, & RIGHT joins
+│   └── set_operations.sql                # Workbook: Combining and intersecting web vs retail data pipelines
+├── 03-data-transformation/
+│   └── string_and_numeric_functions.sql  # Workbook: Data cleaning, text extraction, precision math, and masking
 ├── LICENSE
-└── README.md                       # You are here!
+└── README.md                             # You are here!
